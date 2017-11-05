@@ -10,6 +10,10 @@
   var dataArray = new Uint8Array(1024);
   var yesdebug = false//true;
 
+  function _getPathWithouIndex(url = window.location.href) {
+    return (url.endsWith('.html')) ? window.location.origin : window.location.href;
+  }
+
   document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
     const kconst = {
@@ -52,8 +56,9 @@
 
     let pick = ~~(Math.random()*kcomboArr.length);
     console.log(kcomboArr[pick]);
+    // window.location.pathname prob will be "/flashcards/"
 
-    let url = '//' + window.location.host + '/mp3/' + kcomboArr[pick].romanization + '.mp3';
+    let url = _getPathWithouIndex() + '/mp3/' + kcomboArr[pick].romanization + '.mp3';
     document.getElementById('hangul').innerHTML = kcomboArr[pick].hangul;
 
     let itemLookup = 'hangul_' + kcomboArr[pick].romanization;
